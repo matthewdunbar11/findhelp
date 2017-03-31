@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Findhelp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo right">Find Help</a>
+
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <% if user_signed_in? %>
+            <li>
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+            </li>
+          <% else %>
+            <li>
+            <%= link_to('Login', new_user_session_path)  %>
+            </li>
+          <% end %>
+          <% if user_signed_in? %>
+            <li>
+            <%= link_to('Edit registration', edit_user_registration_path) %>
+            </li>
+          <% else %>
+            <li>
+            <%= link_to('Register', new_user_registration_path)  %>
+            </li>
+          <% end %>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <% if user_signed_in? %>
+            <li>
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+            </li>
+          <% else %>
+            <li>
+            <%= link_to('Login', new_user_session_path)  %>
+            </li>
+          <% end %>
+          <% if user_signed_in? %>
+            <li>
+            <%= link_to('Edit registration', edit_user_registration_path) %>
+            </li>
+          <% else %>
+            <li>
+            <%= link_to('Register', new_user_registration_path)  %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="container">
+      <% if notice %>
+      <div class="card light-blue lighten-3 white-text">
+        <div class="card-content">
+          <p><%= notice %></p>
+        </div>
+      </div>
+      <% end %>
+
+      <% if alert %>
+      <div class="card red lighten-3 white-text">
+        <div class="card-content">
+          <p><%= alert %></p>
+        </div>
+      </div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>
