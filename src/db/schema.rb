@@ -10,22 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331013611) do
+ActiveRecord::Schema.define(version: 20170401230402) do
 
   create_table "help_offers", force: :cascade do |t|
     t.string   "description"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "help_type_id"
+    t.index ["help_type_id"], name: "index_help_offers_on_help_type_id"
     t.index ["user_id"], name: "index_help_offers_on_user_id"
   end
 
   create_table "help_requests", force: :cascade do |t|
     t.string   "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+    t.integer  "help_type_id"
+    t.index ["help_type_id"], name: "index_help_requests_on_help_type_id"
+    t.index ["user_id"], name: "index_help_requests_on_user_id"
+  end
+
+  create_table "help_types", force: :cascade do |t|
+    t.string   "Description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_help_requests_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
